@@ -47,4 +47,10 @@ class HakimController extends Controller
         $hakim = $this->HakimRepo->upsertData($hakimId, $detail);
         return response()->json($hakim, $hakim['code']);
     }
+    
+    public function delete($id):JsonResponse
+    {
+        $hakim = $this->HakimRepo->deleteData($id);
+        return response()->json($hakim, $hakim['code']);
+    }
 }

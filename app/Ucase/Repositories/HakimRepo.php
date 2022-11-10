@@ -83,6 +83,29 @@ class HakimRepo implements HakimInterface {
 
   public function deleteData($id)
   {
-    
+    try {
+      $dbCon = new HakimModels;
+      $dataList = $dbCon->whereId($id);
+
+      if ($dataList->first()) {
+        $hakim = array(
+          'message' => 'Success to get data',
+          'code' => 200,
+          'data' => $dataList->delete()
+        );
+      } else {
+        $hakim = array(
+          'message' => 'Not found',
+          'code' => 404
+        );
+      }
+    } catch (\Throwable $th) {
+      $hakim = array(
+        'message' => $th->getMessage(),
+        'code' => 500
+      );
+    }
+
+    return $hakim;
   }
 }
