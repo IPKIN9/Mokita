@@ -24,3 +24,10 @@ $router->group(['prefix' => 'v1/jadwal_sidang'] , function() use ($router) {
     $router->post('/', ['uses' => 'JadwalSidangController@upsert']);
     $router->delete('/{id}', ['uses' => 'JadwalSidangController@delete']);
 });
+
+$router->group(['prefix' => 'v1/gugatan'] , function() use ($router) {
+    $router->get('/', ['uses' => 'GugatanController@getData']);
+    $router->get('/{id}', ['uses' => 'GugatanController@getById']);
+    $router->post('/', ['uses' => 'GugatanController@upsert']);
+    $router->delete('/{id}', ['uses' => 'GugatanController@delete']);
+});

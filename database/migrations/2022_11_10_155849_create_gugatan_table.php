@@ -21,7 +21,7 @@ class CreateGugatanTable extends Migration
             $table->date('tgl_tidak_rukun');
             $table->string('penyebab', 50);
             $table->date('puncak_konflik');
-            $table->string('tinggal_setelah_pisah');
+            $table->string('lama_pisah', 10);
             $table->timestamps();
         });
     }
