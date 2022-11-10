@@ -8,7 +8,7 @@ class HakimModels extends Model
 {
     protected $table = 'hakim';
     protected $fillable = [
-        'id', 'nama', 'tempat_lahir', 'tgl_lahir', 'jabatan',
+        'id', 'nip', 'nama', 'tempat_lahir', 'tgl_lahir', 'jabatan',
         's1', 's2', 's3', 'sertifikat', 'created_at', 'updated_at'
     ];
 }
