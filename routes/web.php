@@ -17,3 +17,10 @@ $router->group(['prefix' => 'v1/client'] , function() use ($router) {
     $router->post('/', ['uses' => 'ClientController@upsert']);
     $router->delete('/{id}', ['uses' => 'ClientController@delete']);
 });
+
+$router->group(['prefix' => 'v1/jadwal_sidang'] , function() use ($router) {
+    $router->get('/', ['uses' => 'JadwalSidangController@getData']);
+    $router->get('/{id}', ['uses' => 'JadwalSidangController@getById']);
+    $router->post('/', ['uses' => 'JadwalSidangController@upsert']);
+    $router->delete('/{id}', ['uses' => 'JadwalSidangController@delete']);
+});
