@@ -27,7 +27,31 @@ class HakimRepo implements HakimInterface {
 
   public function getDataById($id)
   {
-    
+    try {
+      $dbCon = new HakimModels;
+      $dataList = $dbCon->whereId($id)->first();
+
+      if ($dataList) {
+        $hakim = array(
+          'message' => 'Success to get data',
+          'code' => 200,
+          'data' => $dataList
+        );
+      } else {
+        $hakim = array(
+          'message' => 'Not found',
+          'code' => 404
+        );
+      }
+      
+    } catch (\Throwable $th) {
+      $hakim = array(
+        'message' => $th->getMessage(),
+        'code' => 500
+      );
+    }
+
+    return $hakim;
   }
 
   public function upsertData($id, array $detail)

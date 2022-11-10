@@ -21,6 +21,12 @@ class HakimController extends Controller
         return response()->json($hakim, $hakim['code']);
     }
 
+    public function getById($id):JsonResponse
+    {
+        $hakim = $this->HakimRepo->getDataById($id);
+        return response()->json($hakim, $hakim['code']);
+    }
+
     public function upsert(Request $request):JsonResponse
     {
         $hakimId = $request->id || null;
