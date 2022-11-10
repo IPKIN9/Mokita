@@ -32,7 +32,29 @@ class HakimRepo implements HakimInterface {
 
   public function upsertData($id, array $detail)
   {
-    
+    try {
+      $dbCon = new HakimModels;
+      if ($id) {
+        $hakim = array(
+          'message' => 'Success to update data',
+          'code' => 200,
+          'data' => $dbCon->whereId($id)->update($detail)
+        );
+      } else {
+        $hakim = array(
+          'message' => 'Success to insert data',
+          'code' => 200,
+          'data' => $dbCon->create($detail)
+        );
+      }
+    } catch (\Throwable $th) {
+      $hakim = array(
+        'message' => $th->getMessage(),
+        'code' => 500
+      );
+    }
+
+    return $hakim;
   }
 
   public function deleteData($id)
