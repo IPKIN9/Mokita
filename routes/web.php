@@ -31,3 +31,11 @@ $router->group(['prefix' => 'v1/gugatan'] , function() use ($router) {
     $router->post('/', ['uses' => 'GugatanController@upsert']);
     $router->delete('/{id}', ['uses' => 'GugatanController@delete']);
 });
+
+$router->group(['prefix' => 'v1/anak'] , function() use ($router) {
+    $router->get('/', ['uses' => 'AnakController@getData']);
+    $router->get('/{id}', ['uses' => 'AnakController@getById']);
+    $router->get('/gugatan', ['uses' => 'AnakController@getByGugatan']);
+    $router->post('/', ['uses' => 'AnakController@upsert']);
+    $router->delete('/{id}', ['uses' => 'AnakController@delete']);
+});

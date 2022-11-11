@@ -29,7 +29,7 @@ class ClientController extends Controller
 
     public function upsert(Request $request):JsonResponse
     {
-        $hakimId = $request->id || null;
+        $id = $request->id || null;
         $date = Carbon::now();
 
         $detail = array(
@@ -47,7 +47,7 @@ class ClientController extends Controller
             'kab' => $request->kab,
             'updated_at' => $date
         );
-        $client = $this->ClientRepo->upsertData($hakimId, $detail);
+        $client = $this->ClientRepo->upsertData($id, $detail);
         return response()->json($client, $client['code']);
     }
     

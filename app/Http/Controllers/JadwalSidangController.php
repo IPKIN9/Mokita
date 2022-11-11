@@ -29,7 +29,7 @@ class JadwalSidangController extends Controller
 
     public function upsert(Request $request):JsonResponse
     {
-        $hakimId = $request->id || null;
+        $id = $request->id || null;
         $date = Carbon::now();
 
         $detail = array(
@@ -38,7 +38,7 @@ class JadwalSidangController extends Controller
             'ket' => $request->ket,
             'updated_at' => $date
         );
-        $jadwalSidang = $this->jadwalSidangRepo->upsertData($hakimId, $detail);
+        $jadwalSidang = $this->jadwalSidangRepo->upsertData($id, $detail);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
     

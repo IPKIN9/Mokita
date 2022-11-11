@@ -29,7 +29,7 @@ class HakimController extends Controller
 
     public function upsert(Request $request):JsonResponse
     {
-        $hakimId = $request->id || null;
+        $id = $request->id || null;
         $date = Carbon::now();
 
         $detail = array(
@@ -44,7 +44,7 @@ class HakimController extends Controller
             'sertifikat' => $request->sertifikat,
             'updated_at' => $date
         );
-        $hakim = $this->HakimRepo->upsertData($hakimId, $detail);
+        $hakim = $this->HakimRepo->upsertData($id, $detail);
         return response()->json($hakim, $hakim['code']);
     }
     
