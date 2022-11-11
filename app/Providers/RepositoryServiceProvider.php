@@ -7,11 +7,13 @@ use App\Ucase\Interfaces\ClientInterface;
 use App\Ucase\Interfaces\GugatanInterface;
 use App\Ucase\Interfaces\HakimInterface;
 use App\Ucase\Interfaces\JadwalSidangInterface;
+use App\Ucase\Interfaces\PerkaraInterface;
 use App\Ucase\Repositories\AnakRepo;
 use App\Ucase\Repositories\ClientRepo;
 use App\Ucase\Repositories\GugatenRepo;
 use App\Ucase\Repositories\HakimRepo;
 use App\Ucase\Repositories\JadwalSidangRepo;
+use App\Ucase\Repositories\PerkaraRepo;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -28,5 +30,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(JadwalSidangInterface::class, JadwalSidangRepo::class);
         $this->app->bind(GugatanInterface::class, GugatenRepo::class);
         $this->app->bind(AnakInterface::class, AnakRepo::class);
+        $this->app->bind(PerkaraInterface::class, PerkaraRepo::class);
     }
 }
