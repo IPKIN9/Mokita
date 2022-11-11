@@ -29,7 +29,7 @@ class GugatanController extends Controller
 
     public function upsert(Request $request):JsonResponse
     {
-        $hakimId = $request->id || null;
+        $id = $request->id || null;
         $date = Carbon::now();
 
         $detail = array(
@@ -47,7 +47,7 @@ class GugatanController extends Controller
             'lama_pisah' => $request->lama_pisah,
             'updated_at' => $date
         );
-        $client = $this->gugatanRepo->upsertData($hakimId, $detail);
+        $client = $this->gugatanRepo->upsertData($id, $detail);
         return response()->json($client, $client['code']);
     }
     
