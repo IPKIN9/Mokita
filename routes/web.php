@@ -1,9 +1,4 @@
 <?php
-
-$router->get('/', function () use ($router) {
-    return view('BaseLayout');
-});
-
 $router->group(['prefix' => 'v1/hakim', 'middleware' => 'auth'], function () use ($router) {
     $router->get('/', ['uses' => 'HakimController@getData']);
     $router->get('/{id}', ['uses' => 'HakimController@getById']);
