@@ -6,4 +6,4 @@ Homestead.yaml
 .phpunit.result.cache
 /storage/oauth-private.key
 /storage/oauth-public.key
-/public/assets/vendor
+/public/assets/vendors
