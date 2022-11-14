@@ -18,8 +18,8 @@ class HakimRepo implements HakimInterface
         'code' => 200,
         'data' => $dbCon->HakimList($limit, $page)->get(),
         'meta' => array(
-          'limit' => $limit,
-          'page' => $page,
+          'limit' => (int)$limit,
+          'page' => (int)$page,
           'page_of' => ceil($count / $limit),
           'total' => $count
         )
