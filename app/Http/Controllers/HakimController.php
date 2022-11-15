@@ -31,7 +31,7 @@ class HakimController extends Controller
 
     public function upsert(Request $request): JsonResponse
     {
-        $id = $request->id || null;
+        $id = $request->id | null;
         $date = Carbon::now();
 
         $detail = array(

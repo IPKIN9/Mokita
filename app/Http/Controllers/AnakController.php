@@ -15,22 +15,22 @@ class AnakController extends Controller
         $this->anakRepo = $anakRepo;
     }
 
-    public function getData():JsonResponse
+    public function getData(): JsonResponse
     {
         $params = request('gugatan', null);
         $client = $this->anakRepo->getAllData($params);
         return response()->json($client, $client['code']);
     }
 
-    public function getById($id):JsonResponse
+    public function getById($id): JsonResponse
     {
         $client = $this->anakRepo->getDataById($id);
         return response()->json($client, $client['code']);
     }
 
-    public function upsert(Request $request):JsonResponse
+    public function upsert(Request $request): JsonResponse
     {
-        $id = $request->id || null;
+        $id = $request->id | null;
         $date = Carbon::now();
 
         $detail = array(
@@ -43,8 +43,8 @@ class AnakController extends Controller
         $client = $this->anakRepo->upsertData($id, $detail);
         return response()->json($client, $client['code']);
     }
-    
-    public function delete($id):JsonResponse
+
+    public function delete($id): JsonResponse
     {
         $client = $this->anakRepo->deleteData($id);
         return response()->json($client, $client['code']);
