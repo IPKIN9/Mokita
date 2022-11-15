@@ -12,9 +12,16 @@ class AnakModels extends Model
         'created_at', 'updated_at'
     ];
 
-    public function scopeGugatan($query, $term){
+    public function scopeGugatan($query, $term)
+    {
         if ($term) {
             $query->where('id_gugatan', $term);
         }
+    }
+
+    public function scopeAnakList($query, $limit, $page)
+    {
+        $page = ($page - 1) * $limit;
+        return $query->offset($page)->limit($limit);
     }
 }

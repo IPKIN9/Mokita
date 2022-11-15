@@ -17,7 +17,9 @@ class PerkaraController extends Controller
 
     public function getData(): JsonResponse
     {
-        $client = $this->perkaraRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $client = $this->perkaraRepo->getAllData($limit, $page);
         return response()->json($client, $client['code']);
     }
 

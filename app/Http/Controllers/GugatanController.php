@@ -17,7 +17,9 @@ class GugatanController extends Controller
 
     public function getData(): JsonResponse
     {
-        $client = $this->gugatanRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $client = $this->gugatanRepo->getAllData($limit, $page);
         return response()->json($client, $client['code']);
     }
 

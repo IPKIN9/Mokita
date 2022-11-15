@@ -17,7 +17,9 @@ class JadwalSidangController extends Controller
 
     public function getData(): JsonResponse
     {
-        $jadwalSidang = $this->jadwalSidangRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $jadwalSidang = $this->jadwalSidangRepo->getAllData($limit, $page);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
 

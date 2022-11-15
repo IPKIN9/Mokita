@@ -18,7 +18,9 @@ class AnakController extends Controller
     public function getData(): JsonResponse
     {
         $params = request('gugatan', null);
-        $client = $this->anakRepo->getAllData($params);
+        $limit = request('limit');
+        $page = request('page');
+        $client = $this->anakRepo->getAllData($params, $limit, $page);
         return response()->json($client, $client['code']);
     }
 

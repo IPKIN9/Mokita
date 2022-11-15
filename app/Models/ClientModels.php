@@ -12,4 +12,10 @@ class ClientModels extends Model
         'agama', 'pendidikan', 'pekerjaan', 'alamat', 'kel', 'kec', 'kab',
         'created_at', 'updated_at'
     ];
+
+    public function scopeClientList($query, $limit, $page)
+    {
+        $page = ($page - 1) * $limit;
+        return $query->offset($page)->limit($limit);
+    }
 }

@@ -5,15 +5,24 @@ namespace App\Ucase\Repositories;
 use App\Models\GugatanModels;
 use App\Ucase\Interfaces\GugatanInterface;
 
-class GugatenRepo implements GugatanInterface {
+class GugatenRepo implements GugatanInterface
+{
 
-  public function getAllData() {
+  public function getAllData($limit, $page)
+  {
     try {
-      $dbCon = new GugatanModels();
+      $dbCon = new GugatanModels;
+      $count = $dbCon->count();
       $gugatan = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->all()
+        'data' => $dbCon->GugatanList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $gugatan = array(
@@ -43,7 +52,6 @@ class GugatenRepo implements GugatanInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $gugatan = array(
         'message' => $th->getMessage(),

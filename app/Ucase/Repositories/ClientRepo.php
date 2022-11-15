@@ -5,15 +5,24 @@ namespace App\Ucase\Repositories;
 use App\Models\ClientModels;
 use App\Ucase\Interfaces\ClientInterface;
 
-class ClientRepo implements ClientInterface {
+class ClientRepo implements ClientInterface
+{
 
-  public function getAllData() {
+  public function getAllData($limit, $page)
+  {
     try {
       $dbCon = new ClientModels();
+      $count = $dbCon->count();
       $client = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->all()
+        'data' => $dbCon->ClientList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $client = array(
@@ -43,7 +52,6 @@ class ClientRepo implements ClientInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $client = array(
         'message' => $th->getMessage(),

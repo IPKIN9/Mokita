@@ -17,7 +17,9 @@ class ClientController extends Controller
 
     public function getData(): JsonResponse
     {
-        $client = $this->ClientRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $client = $this->ClientRepo->getAllData($limit, $page);
         return response()->json($client, $client['code']);
     }
 

@@ -5,15 +5,24 @@ namespace App\Ucase\Repositories;
 use App\Models\JadwalSidangModels;
 use App\Ucase\Interfaces\JadwalSidangInterface;
 
-class JadwalSidangRepo implements JadwalSidangInterface {
+class JadwalSidangRepo implements JadwalSidangInterface
+{
 
-  public function getAllData() {
+  public function getAllData($limit, $page)
+  {
     try {
-      $dbCon = new JadwalSidangModels();
+      $dbCon = new JadwalSidangModels;
+      $count = $dbCon->count();
       $jadwalSidang = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->all()
+        'data' => $dbCon->JadwalList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $jadwalSidang = array(
@@ -43,7 +52,6 @@ class JadwalSidangRepo implements JadwalSidangInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $jadwalSidang = array(
         'message' => $th->getMessage(),

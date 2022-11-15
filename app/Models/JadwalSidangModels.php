@@ -10,4 +10,10 @@ class JadwalSidangModels extends Model
     protected $fillable = [
         'tgl_waktu_mulai', 'tgl_waktu_berakhir', 'ket', 'created_at', 'updated_at'
     ];
+
+    public function scopeJadwalList($query, $limit, $page)
+    {
+        $page = ($page - 1) * $limit;
+        return $query->offset($page)->limit($limit);
+    }
 }
