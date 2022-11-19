@@ -9,27 +9,29 @@ use Illuminate\Http\Request;
 
 class JadwalSidangController extends Controller
 {
-     private JadwalSidangInterface $jadwalSidangRepo;
+    private JadwalSidangInterface $jadwalSidangRepo;
     public function __construct(JadwalSidangInterface $jadwalSidangRepo)
     {
         $this->jadwalSidangRepo = $jadwalSidangRepo;
     }
 
-    public function getData():JsonResponse
+    public function getData(): JsonResponse
     {
-        $jadwalSidang = $this->jadwalSidangRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $jadwalSidang = $this->jadwalSidangRepo->getAllData($limit, $page);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
 
-    public function getById($id):JsonResponse
+    public function getById($id): JsonResponse
     {
         $jadwalSidang = $this->jadwalSidangRepo->getDataById($id);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
 
-    public function upsert(Request $request):JsonResponse
+    public function upsert(Request $request): JsonResponse
     {
-        $id = $request->id || null;
+        $id = $request->id | null;
         $date = Carbon::now();
 
         $detail = array(
@@ -41,8 +43,8 @@ class JadwalSidangController extends Controller
         $jadwalSidang = $this->jadwalSidangRepo->upsertData($id, $detail);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
-    
-    public function delete($id):JsonResponse
+
+    public function delete($id): JsonResponse
     {
         $jadwalSidang = $this->jadwalSidangRepo->deleteData($id);
         return response()->json($jadwalSidang, $jadwalSidang['code']);

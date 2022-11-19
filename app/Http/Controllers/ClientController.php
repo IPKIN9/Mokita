@@ -6,6 +6,7 @@ use App\Ucase\Interfaces\ClientInterface;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use stdClass;
 
 class ClientController extends Controller
 {
@@ -15,33 +16,39 @@ class ClientController extends Controller
         $this->ClientRepo = $ClientRepo;
     }
 
-    public function getData():JsonResponse
+    public function getData(): JsonResponse
     {
-        $client = $this->ClientRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $search = array(
+            'nama' => request('nama'),
+            'status' => request('status'),
+        );
+        $client = $this->ClientRepo->getAllData($limit, $page, $search);
         return response()->json($client, $client['code']);
     }
 
-    public function getById($id):JsonResponse
+    public function getById($id): JsonResponse
     {
         $client = $this->ClientRepo->getDataById($id);
         return response()->json($client, $client['code']);
     }
 
-    public function upsert(Request $request):JsonResponse
+    public function upsert(Request $request): JsonResponse
     {
-        $id = $request->id || null;
+        $id = $request->id | null;
         $date = Carbon::now();
 
         $detail = array(
-            'nama' => $request->nama, 
-            'status' => $request->status, 
-            'marga' => $request->marga, 
-            'tempat_lahir' => $request->tempat_lahir, 
-            'tgl_lahir' => $request->tgl_lahir, 
+            'nama' => $request->nama,
+            'status' => $request->status,
+            'marga' => $request->marga,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
             'agama' => $request->agama,
-            'pendidikan' => $request->pendidikan, 
-            'pekerjaan' => $request->pekerjaan, 
-            'alamat' => $request->alamat, 
+            'pendidikan' => $request->pendidikan,
+            'pekerjaan' => $request->pekerjaan,
+            'alamat' => $request->alamat,
             'kel' => $request->kel,
             'kec' => $request->kec,
             'kab' => $request->kab,
@@ -50,8 +57,8 @@ class ClientController extends Controller
         $client = $this->ClientRepo->upsertData($id, $detail);
         return response()->json($client, $client['code']);
     }
-    
-    public function delete($id):JsonResponse
+
+    public function delete($id): JsonResponse
     {
         $client = $this->ClientRepo->deleteData($id);
         return response()->json($client, $client['code']);

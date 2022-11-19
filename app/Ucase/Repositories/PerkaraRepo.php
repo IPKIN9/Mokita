@@ -5,15 +5,24 @@ namespace App\Ucase\Repositories;
 use App\Models\PerkaraModels;
 use App\Ucase\Interfaces\PerkaraInterface;
 
-class PerkaraRepo implements PerkaraInterface {
+class PerkaraRepo implements PerkaraInterface
+{
 
-  public function getAllData() {
+  public function getAllData($limit, $page)
+  {
     try {
       $dbCon = new PerkaraModels();
+      $count = $dbCon->count();
       $perkara = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->all()
+        'data' => $dbCon->PerkaraList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $perkara = array(
@@ -43,7 +52,6 @@ class PerkaraRepo implements PerkaraInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $perkara = array(
         'message' => $th->getMessage(),

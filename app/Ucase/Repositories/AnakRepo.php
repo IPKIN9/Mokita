@@ -5,16 +5,25 @@ namespace App\Ucase\Repositories;
 use App\Models\AnakModels;
 use App\Ucase\Interfaces\AnakInterface;
 
-class AnakRepo implements AnakInterface {
+class AnakRepo implements AnakInterface
+{
 
-  public function getAllData($params) {
+  public function getAllData($params, $limit, $page)
+  {
     try {
       $dbCon = new AnakModels;
+      $count = $dbCon->count();
       $dataList = $dbCon->gugatan($params);
       $anak = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dataList->get()
+        'data' => $dataList->AnakList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $anak = array(
@@ -44,7 +53,6 @@ class AnakRepo implements AnakInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $anak = array(
         'message' => $th->getMessage(),

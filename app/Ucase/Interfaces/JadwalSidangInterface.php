@@ -2,8 +2,9 @@
 
 namespace App\Ucase\Interfaces;
 
-interface JadwalSidangInterface {
-  public function getAllData();
+interface JadwalSidangInterface
+{
+  public function getAllData($limit, $page);
   public function getDataById($id);
   public function upsertData($id, array $detail);
   public function deleteData($id);

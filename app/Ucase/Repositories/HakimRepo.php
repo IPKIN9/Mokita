@@ -5,15 +5,24 @@ namespace App\Ucase\Repositories;
 use App\Models\HakimModels;
 use App\Ucase\Interfaces\HakimInterface;
 
-class HakimRepo implements HakimInterface {
+class HakimRepo implements HakimInterface
+{
 
-  public function getAllData() {
+  public function getAllData($limit, $page)
+  {
     try {
       $dbCon = new HakimModels;
+      $count = $dbCon->count();
       $hakim = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->all()
+        'data' => $dbCon->HakimList($limit, $page)->get(),
+        'meta' => array(
+          'limit' => (int)$limit,
+          'page' => (int)$page,
+          'page_of' => ceil($count / $limit),
+          'total' => $count
+        )
       );
     } catch (\Throwable $th) {
       $hakim = array(
@@ -43,7 +52,6 @@ class HakimRepo implements HakimInterface {
           'code' => 404
         );
       }
-      
     } catch (\Throwable $th) {
       $hakim = array(
         'message' => $th->getMessage(),

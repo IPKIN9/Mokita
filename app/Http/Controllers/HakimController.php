@@ -15,40 +15,42 @@ class HakimController extends Controller
         $this->HakimRepo = $HakimRepo;
     }
 
-    public function getData():JsonResponse
+    public function getData(): JsonResponse
     {
-        $hakim = $this->HakimRepo->getAllData();
+        $limit = request('limit');
+        $page = request('page');
+        $hakim = $this->HakimRepo->getAllData($limit, $page);
         return response()->json($hakim, $hakim['code']);
     }
 
-    public function getById($id):JsonResponse
+    public function getById($id): JsonResponse
     {
         $hakim = $this->HakimRepo->getDataById($id);
         return response()->json($hakim, $hakim['code']);
     }
 
-    public function upsert(Request $request):JsonResponse
+    public function upsert(Request $request): JsonResponse
     {
-        $id = $request->id || null;
+        $id = $request->id | null;
         $date = Carbon::now();
 
         $detail = array(
-            'nama' => $request->nama, 
-            'nip' => $request->nip, 
-            'tempat_lahir' => $request->tempat_lahir, 
-            'tgl_lahir' => $request->tgl_lahir, 
+            'nama' => $request->nama,
+            'nip' => $request->nip,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tgl_lahir' => $request->tgl_lahir,
             'jabatan' => $request->jabatan,
-            's1' => $request->s1, 
-            's2' => $request->s2, 
-            's3' => $request->s3, 
+            's1' => $request->s1,
+            's2' => $request->s2,
+            's3' => $request->s3,
             'sertifikat' => $request->sertifikat,
             'updated_at' => $date
         );
         $hakim = $this->HakimRepo->upsertData($id, $detail);
         return response()->json($hakim, $hakim['code']);
     }
-    
-    public function delete($id):JsonResponse
+
+    public function delete($id): JsonResponse
     {
         $hakim = $this->HakimRepo->deleteData($id);
         return response()->json($hakim, $hakim['code']);

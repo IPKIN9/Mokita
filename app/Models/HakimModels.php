@@ -11,4 +11,10 @@ class HakimModels extends Model
         'id', 'nip', 'nama', 'tempat_lahir', 'tgl_lahir', 'jabatan',
         's1', 's2', 's3', 'sertifikat', 'created_at', 'updated_at'
     ];
+
+    public function scopeHakimList($query, $limit, $page)
+    {
+        $page = ($page - 1) * $limit;
+        return $query->offset($page)->limit($limit);
+    }
 }
