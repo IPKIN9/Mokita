@@ -6,6 +6,7 @@ use App\Ucase\Interfaces\ClientInterface;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use stdClass;
 
 class ClientController extends Controller
 {
@@ -19,7 +20,11 @@ class ClientController extends Controller
     {
         $limit = request('limit');
         $page = request('page');
-        $client = $this->ClientRepo->getAllData($limit, $page);
+        $search = array(
+            'nama' => request('nama'),
+            'status' => request('status'),
+        );
+        $client = $this->ClientRepo->getAllData($limit, $page, $search);
         return response()->json($client, $client['code']);
     }
 

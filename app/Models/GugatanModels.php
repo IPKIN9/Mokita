@@ -17,6 +17,11 @@ class GugatanModels extends Model
     public function scopeGugatanList($query, $limit, $page)
     {
         $page = ($page - 1) * $limit;
-        return $query->offset($page)->limit($limit);
+        return $query
+            ->join('client as penggugat', 'gugatan.id_penggugat', '=', 'penggugat.id')
+            ->join('client as tergugat', 'gugatan.id_tergugat', '=', 'tergugat.id')
+            ->select('gugatan.*', 'penggugat.nama as penggugat', 'tergugat.nama as tergugat')
+            ->offset($page)
+            ->limit($limit);
     }
 }

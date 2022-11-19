@@ -8,7 +8,7 @@ use App\Ucase\Interfaces\ClientInterface;
 class ClientRepo implements ClientInterface
 {
 
-  public function getAllData($limit, $page)
+  public function getAllData($limit, $page, $search)
   {
     try {
       $dbCon = new ClientModels();
@@ -16,7 +16,7 @@ class ClientRepo implements ClientInterface
       $client = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->ClientList($limit, $page)->get(),
+        'data' => $dbCon->ClientList($limit, $page, $search)->get(),
         'meta' => array(
           'limit' => (int)$limit,
           'page' => (int)$page,
