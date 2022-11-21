@@ -19,7 +19,8 @@ class JadwalSidangController extends Controller
     {
         $limit = request('limit');
         $page = request('page');
-        $jadwalSidang = $this->jadwalSidangRepo->getAllData($limit, $page);
+        $search = request('search');
+        $jadwalSidang = $this->jadwalSidangRepo->getAllData($limit, $page, $search);
         return response()->json($jadwalSidang, $jadwalSidang['code']);
     }
 

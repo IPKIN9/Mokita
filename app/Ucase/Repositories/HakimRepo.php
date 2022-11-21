@@ -8,7 +8,7 @@ use App\Ucase\Interfaces\HakimInterface;
 class HakimRepo implements HakimInterface
 {
 
-  public function getAllData($limit, $page)
+  public function getAllData($limit, $page, $search)
   {
     try {
       $dbCon = new HakimModels;
@@ -16,7 +16,7 @@ class HakimRepo implements HakimInterface
       $hakim = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->HakimList($limit, $page)->get(),
+        'data' => $dbCon->HakimList($limit, $page, $search)->get(),
         'meta' => array(
           'limit' => (int)$limit,
           'page' => (int)$page,

@@ -8,7 +8,7 @@ use App\Ucase\Interfaces\JadwalSidangInterface;
 class JadwalSidangRepo implements JadwalSidangInterface
 {
 
-  public function getAllData($limit, $page)
+  public function getAllData($limit, $page, $search)
   {
     try {
       $dbCon = new JadwalSidangModels;
@@ -16,7 +16,7 @@ class JadwalSidangRepo implements JadwalSidangInterface
       $jadwalSidang = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->JadwalList($limit, $page)->get(),
+        'data' => $dbCon->JadwalList($limit, $page, $search)->get(),
         'meta' => array(
           'limit' => (int)$limit,
           'page' => (int)$page,

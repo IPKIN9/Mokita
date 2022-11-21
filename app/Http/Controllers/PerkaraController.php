@@ -34,7 +34,14 @@ class PerkaraController extends Controller
         $id = $request->id | null;
         $date = Carbon::now();
 
+        if (!$request->no_perkara) {
+            $no_perkara = Carbon::now()->format('YmdHi');
+        } else {
+            $no_perkara = $request->no_perkara;
+        }
+
         $detail = array(
+            'no_perkara' => $no_perkara,
             'id_hakim' => $request->id_hakim,
             'pengacara' => $request->pengacara,
             'penitra' => $request->penitra,

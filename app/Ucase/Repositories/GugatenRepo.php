@@ -8,7 +8,7 @@ use App\Ucase\Interfaces\GugatanInterface;
 class GugatenRepo implements GugatanInterface
 {
 
-  public function getAllData($limit, $page)
+  public function getAllData($limit, $page, $search)
   {
     try {
       $dbCon = new GugatanModels;
@@ -16,7 +16,7 @@ class GugatenRepo implements GugatanInterface
       $gugatan = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->GugatanList($limit, $page)->get(),
+        'data' => $dbCon->GugatanList($limit, $page, $search)->get(),
         'meta' => array(
           'limit' => (int)$limit,
           'page' => (int)$page,

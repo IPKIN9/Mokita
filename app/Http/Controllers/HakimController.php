@@ -19,7 +19,8 @@ class HakimController extends Controller
     {
         $limit = request('limit');
         $page = request('page');
-        $hakim = $this->HakimRepo->getAllData($limit, $page);
+        $search = request('search');
+        $hakim = $this->HakimRepo->getAllData($limit, $page, $search);
         return response()->json($hakim, $hakim['code']);
     }
 

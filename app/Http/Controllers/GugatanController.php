@@ -19,7 +19,8 @@ class GugatanController extends Controller
     {
         $limit = request('limit');
         $page = request('page');
-        $client = $this->gugatanRepo->getAllData($limit, $page);
+        $search = request('search');
+        $client = $this->gugatanRepo->getAllData($limit, $page, $search);
         return response()->json($client, $client['code']);
     }
 
