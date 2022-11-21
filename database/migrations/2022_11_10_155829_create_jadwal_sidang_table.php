@@ -10,8 +10,8 @@ class CreateJadwalSidangTable extends Migration
     {
         Schema::create('jadwal_sidang', function (Blueprint $table) {
             $table->id();
-            $table->date('tgl_waktu_mulai');
-            $table->date('tgl_waktu_berakhir');
+            $table->dateTimeTz('tgl_waktu_mulai');
+            $table->dateTimeTz('tgl_waktu_berakhir');
             $table->text('ket');
             $table->timestamps();
         });
