@@ -5,7 +5,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: "mokita"
-      MYSQL_USER: "mokita"
+      MYSQL_USER: "cherrypie"
       MYSQL_PASSWORD: "admin"
       MYSQL_ROOT_PASSWORD: "secret"
     ports:
