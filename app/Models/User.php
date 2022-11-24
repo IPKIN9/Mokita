@@ -15,7 +15,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     use HasApiTokens, Authenticatable, Authorizable, HasFactory;
     protected $table = 'user';
     protected $fillable = [
-        'nama', 'email',
+        'nama', 'email', 'role',
     ];
 
     protected $hidden = [

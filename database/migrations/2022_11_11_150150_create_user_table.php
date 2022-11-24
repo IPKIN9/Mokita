@@ -12,6 +12,7 @@ class CreateUserTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
+            $table->enum('role', ['crud-list', 'see-list']);
             $table->string('password');
             $table->timestamps();
         });

@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
             'id' => '932',
             'nama' => 'super admin',
             'email' => 'admin@mokita.com',
+            'role' => 'crud-list',
             'password' => Hash::make('123456')
         ]);
     }
