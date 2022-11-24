@@ -21,4 +21,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        $query->where('nama', 'LIKE', '%' . $search . '%')->where('role', 'see-list')->select('nama');
+    }
 }

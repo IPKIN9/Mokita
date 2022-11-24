@@ -8,12 +8,14 @@ use App\Models\JadwalSidangModels;
 use App\Models\PerkaraModels;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index(): JsonResponse
     {
         try {
+            $progress = Auth::user()->nama;
             $listCount = array(
                 'code' => 200,
                 'message' => 'success',
@@ -23,6 +25,7 @@ class DashboardController extends Controller
                     'perkara' => PerkaraModels::count(),
                     'jadwal' => JadwalSidangModels::count()
                 ),
+                'progress' => $progress
             );
         } catch (\Throwable $th) {
             $listCount = array(

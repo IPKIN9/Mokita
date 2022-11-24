@@ -48,3 +48,7 @@ $router->group(['prefix' => 'v1/perkara', 'middleware' => ['auth', 'scope:crud-l
     $router->post('/', ['uses' => 'PerkaraController@upsert']);
     $router->delete('/{id}', ['uses' => 'PerkaraController@delete']);
 });
+
+$router->group(['prefix' => 'v1/userlist'], function () use ($router) {
+    $router->get('/', ['uses' => 'UserController@getUserList']);
+});
