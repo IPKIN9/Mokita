@@ -11,8 +11,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::insert([
+            'id' => '932',
             'nama' => 'super admin',
-            'email' => 'oned',
+            'email' => 'admin@mokita.com',
             'password' => Hash::make('123456')
         ]);
     }
