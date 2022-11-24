@@ -3,7 +3,7 @@ $router->group(['prefix' => 'v1/roles'], function () use ($router) {
     $router->get('/', ['uses' => 'RoleController@getRole']);
 });
 
-$router->group(['prefix' => 'v1/dashboard', 'middleware' => ['auth', 'scope:crud-list']], function () use ($router) {
+$router->group(['prefix' => 'v1/dashboard', 'middleware' => ['auth', 'scope:crud-list,see-list']], function () use ($router) {
     $router->get('/', ['uses' => 'DashboardController@index']);
 });
 
