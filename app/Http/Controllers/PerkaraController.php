@@ -19,14 +19,15 @@ class PerkaraController extends Controller
     {
         $limit = request('limit');
         $page = request('page');
-        $client = $this->perkaraRepo->getAllData($limit, $page);
-        return response()->json($client, $client['code']);
+        $search = request('search');
+        $perkara = $this->perkaraRepo->getAllData($limit, $page, $search);
+        return response()->json($perkara, $perkara['code']);
     }
 
     public function getById($id): JsonResponse
     {
-        $client = $this->perkaraRepo->getDataById($id);
-        return response()->json($client, $client['code']);
+        $perkara = $this->perkaraRepo->getDataById($id);
+        return response()->json($perkara, $perkara['code']);
     }
 
     public function upsert(Request $request): JsonResponse
@@ -50,13 +51,13 @@ class PerkaraController extends Controller
             'id_jadwal' => $request->id_jadwal,
             'updated_at' => $date
         );
-        $client = $this->perkaraRepo->upsertData($id, $detail);
-        return response()->json($client, $client['code']);
+        $perkara = $this->perkaraRepo->upsertData($id, $detail);
+        return response()->json($perkara, $perkara['code']);
     }
 
     public function delete($id): JsonResponse
     {
-        $client = $this->perkaraRepo->deleteData($id);
-        return response()->json($client, $client['code']);
+        $perkara = $this->perkaraRepo->deleteData($id);
+        return response()->json($perkara, $perkara['code']);
     }
 }

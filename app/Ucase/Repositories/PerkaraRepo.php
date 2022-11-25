@@ -8,7 +8,7 @@ use App\Ucase\Interfaces\PerkaraInterface;
 class PerkaraRepo implements PerkaraInterface
 {
 
-  public function getAllData($limit, $page)
+  public function getAllData($limit, $page, $search)
   {
     try {
       $dbCon = new PerkaraModels();
@@ -16,7 +16,7 @@ class PerkaraRepo implements PerkaraInterface
       $perkara = array(
         'message' => 'Success to get data',
         'code' => 200,
-        'data' => $dbCon->PerkaraList($limit, $page)->get(),
+        'data' => $dbCon->Search($search)->PerkaraList($limit, $page)->get(),
         'meta' => array(
           'limit' => (int)$limit,
           'page' => (int)$page,

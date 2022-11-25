@@ -12,6 +12,14 @@ class PerkaraModels extends Model
         'status', 'id_jadwal', 'created_at', 'updated_at'
     ];
 
+    public function scopeSearch($query, $search)
+    {
+        if ($search) {
+            return $query
+                ->where('pengacara', 'LIKE', '%' . $search . '%');
+        }
+    }
+
     public function scopePerkaraList($query, $limit, $page)
     {
         $page = ($page - 1) * $limit;
