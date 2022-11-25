@@ -24,6 +24,13 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 
     public function scopeSearch($query, $search)
     {
-        $query->where('nama', 'LIKE', '%' . $search . '%')->where('role', 'see-list')->select('nama');
+        if ($search) {
+            return $query
+                ->where('role', 'see-list')
+                ->where('nama', 'LIKE', '%' . $search . '%')
+                ->orWhere('email', 'LIKE', '%' . $search . '%')->select('nama');
+        } else {
+            return $query->where('role', 'see-list')->select('nama');
+        }
     }
 }
