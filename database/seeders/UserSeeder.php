@@ -11,16 +11,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::insert([
-            'id' => '932',
+            'id' => '539',
             'nama' => 'super admin',
             'email' => 'admin@mokita.com',
             'role' => 'crud-list',
-            'password' => Hash::make('123456')
+            'password' => Hash::make('E5kAfX8cB&5^')
         ]);
         User::insert([
-            'id' => '592',
-            'nama' => 'example name',
-            'email' => 'staff1@mokita.com',
+            'id' => '823',
+            'nama' => 'first staff',
+            'email' => 'staff@mokita.com',
             'role' => 'see-list',
             'password' => Hash::make('123456')
         ]);
