@@ -47,8 +47,12 @@ class UserController extends Controller
                 'code' => 200,
                 'message' => 'Success'
             );
+
             if ($userId) {
-                $user['data'] =  $con->whereId($userId)->update($payload);
+                $role = $con->whereId($userId)->select('role')->first();
+                if ($role->role != 'crud-list') {
+                    $user['data'] =  $con->whereId($userId)->update($payload);
+                }
             } else {
                 $user['data'] =  $con->create($payload);
             }
@@ -67,12 +71,18 @@ class UserController extends Controller
         try {
             $con = new User();
             $find = $con->whereId($id);
+            $role = $find->select('role')->first();
 
-            if ($find->count() >= 1) {
+            if ($find->count() >= 1 & $role->role != 'crud-list') {
                 $user = array(
                     'code' => 200,
                     'message' => 'Success to delete',
                     'data' => $find->delete()
+                );
+            } else {
+                $user = array(
+                    'code' => 404,
+                    'message' => 'Not found'
                 );
             }
         } catch (\Throwable $th) {

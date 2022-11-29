@@ -30,7 +30,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
                 ->where('nama', 'LIKE', '%' . $search . '%')
                 ->orWhere('email', 'LIKE', '%' . $search . '%')->select('nama');
         } else {
-            return $query->where('role', 'see-list')->select('nama', 'email');
+            return $query->where('role', 'see-list')->select('id', 'nama', 'email');
         }
     }
 
