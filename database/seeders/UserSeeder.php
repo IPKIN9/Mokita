@@ -17,12 +17,5 @@ class UserSeeder extends Seeder
             'role' => 'crud-list',
             'password' => Hash::make('E5kAfX8cB&5^')
         ]);
-        User::insert([
-            'id' => '823',
-            'nama' => 'first staff',
-            'email' => 'staff@mokita.com',
-            'role' => 'see-list',
-            'password' => Hash::make('123456')
-        ]);
     }
 }
